@@ -1,0 +1,26 @@
+<RCC>
+    <!-- Иконки интерфейса -->
+    <qresource prefix="/icons">
+        <file alias="angle-right">icons/angle-right.svg</file>
+        <file alias="arrow-left">icons/arrow-small-left.svg</file>
+        <file alias="elephant">icons/elephant.svg</file>
+        <file alias="home">icons/home.svg</file>
+        <file alias="paw">icons/paw.svg</file>
+        <file alias="settings">icons/settings-sliders.svg</file>
+        <file alias="sun">icons/sun.svg</file>
+        <file alias="user">icons/user.svg</file>
+    </qresource>
+
+    <!-- Стили тем: ThemeManager грузит :/themes/light и :/themes/dark -->
+    <qresource prefix="/themes">
+        <file alias="light">style/light.qss</file>
+        <file alias="dark">style/dark.qss</file>
+    </qresource>
+
+    <!-- Кастомные шрифты -->
+    <qresource prefix="/fonts">
+        <file alias="fredoka">fonts/Fredoka-VariableFont.ttf</file>
+        <file alias="roboto-italic">fonts/Roboto-Italic-VariableFont.ttf</file>
+        <file alias="roboto">fonts/Roboto-VariableFont.ttf</file>
+    </qresource>
+</RCC>

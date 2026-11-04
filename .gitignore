@@ -1,0 +1,35 @@
+# --- CMake / build output ---
+/build/
+/out/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+CMakeScripts/
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+*.ninja
+.ninja_deps
+.ninja_log
+compile_commands.json
+install_manifest.txt
+
+# --- vcpkg ---
+# Каталог создаётся манифестом (vcpkg install), в репозиторий не попадает.
+/vcpkg_installed/
+/vcpkg_installed.bak/
+
+# --- IDE / редакторы ---
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+CMakeUserPresets.json
+
+# --- Qt автогенерация (на случай сборки вне build/) ---
+ui_*.h
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+*.moc

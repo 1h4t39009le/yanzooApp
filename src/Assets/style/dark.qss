@@ -1,0 +1,276 @@
+/* ============================================================
+   YanZoo Widgets — тёмная тема.
+   Цветовая гамма из первого коммита:
+   фон #1e1e1e, поверхности #252526, акцент #007acc.
+   ============================================================ */
+
+QWidget {
+    color: #ffffff;
+    font-family: "Roboto", "Segoe UI", sans-serif;
+    font-size: 11pt;
+}
+
+QMainWindow,
+QWidget#centralwidget,
+QFrame#topBar,
+QWidget#EnclosurePage,
+QWidget#AnimalPage,
+QWidget#FeedingPage {
+    background-color: #1e1e1e;
+}
+
+QLabel {
+    background-color: transparent;
+}
+
+QLabel[role="title"] {
+    color: #ffffff;
+    font-size: 18pt;
+    font-weight: 700;
+}
+
+QLabel[role="section"] {
+    color: #ffffff;
+    font-size: 11pt;
+    font-weight: 700;
+}
+
+QLabel[role="secondary"] {
+    color: #cccccc;
+}
+
+QLabel[role="accent"] {
+    color: #4da3e0;
+    font-size: 9pt;
+}
+
+QLabel[role="accentValue"] {
+    color: #4da3e0;
+    font-size: 11pt;
+    font-weight: 700;
+}
+
+QLabel[role="avatar"] {
+    color: #4da3e0;
+    font-size: 14pt;
+    font-weight: 700;
+}
+
+/* ---------- Карточки, баннеры, разделители ---------- */
+
+QFrame[card="true"] {
+    background-color: #252526;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+}
+
+QFrame[avatar="true"] {
+    background-color: #333337;
+    border: 1px solid #3f3f46;
+    border-radius: 18px;
+}
+
+QFrame[banner="true"] {
+    background-color: #102b3f;
+    border: 1px solid #007acc;
+    border-radius: 6px;
+}
+
+QFrame[divider="true"] {
+    background-color: #3f3f46;
+    border: none;
+}
+
+QWidget#listCard {
+    background-color: transparent;
+}
+
+QLabel#cardTitleLabel {
+    color: #ffffff;
+    font-size: 11pt;
+}
+
+QLabel#cardSubtitleLabel {
+    color: #cccccc;
+    font-size: 9pt;
+}
+
+QLabel#cardArrowLabel {
+    color: #cccccc;
+    font-size: 18pt;
+}
+
+/* ---------- Кнопки ---------- */
+
+QPushButton {
+    background-color: #333337;
+    color: #ffffff;
+    border: 1px solid #434346;
+    border-radius: 4px;
+    padding: 6px 12px;
+    min-height: 20px;
+}
+
+QPushButton:hover {
+    background-color: #3f3f46;
+}
+
+QPushButton:pressed {
+    background-color: #007acc;
+    color: #ffffff;
+}
+
+QPushButton:checked {
+    background-color: #007acc;
+    border-color: #007acc;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+QPushButton[accent="true"] {
+    background-color: #007acc;
+    border-color: #007acc;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+QPushButton[accent="true"]:hover {
+    background-color: #1a8ad9;
+    border-color: #1a8ad9;
+}
+
+QPushButton[accent="true"]:pressed {
+    background-color: #005a99;
+}
+
+QPushButton:disabled {
+    background-color: #2a2a2d;
+    border-color: #3f3f46;
+    color: #777777;
+}
+
+QPushButton#settingsButton {
+    padding: 0;
+    border-radius: 4px;
+}
+
+/* ---------- Списки вольеров и животных ---------- */
+
+QListWidget {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    outline: none;
+}
+
+QListWidget::item {
+    background-color: #252526;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+}
+
+QListWidget::item:hover {
+    background-color: #3f3f46;
+    border: 2px solid #007acc;
+}
+
+QListWidget::item:selected {
+    background-color: #007acc;
+    border: 2px solid #007acc;
+}
+
+/* ---------- Рацион и прочие прокручиваемые области ---------- */
+
+QScrollArea {
+    background-color: transparent;
+    border: none;
+}
+
+QScrollArea > QWidget > QWidget {
+    background-color: transparent;
+}
+
+QScrollBar:vertical {
+    background: transparent;
+    width: 10px;
+    margin: 2px;
+}
+
+QScrollBar::handle:vertical {
+    background-color: #3f3f46;
+    border-radius: 4px;
+    min-height: 30px;
+}
+
+QScrollBar::handle:vertical:hover {
+    background-color: #007acc;
+}
+
+QScrollBar::add-line:vertical,
+QScrollBar::sub-line:vertical {
+    width: 0;
+    height: 0;
+}
+
+QScrollBar::add-page:vertical,
+QScrollBar::sub-page:vertical {
+    background: transparent;
+}
+
+QScrollBar:horizontal {
+    background: transparent;
+    height: 10px;
+    margin: 2px;
+}
+
+QScrollBar::handle:horizontal {
+    background-color: #3f3f46;
+    border-radius: 4px;
+    min-width: 30px;
+}
+
+QScrollBar::handle:horizontal:hover {
+    background-color: #007acc;
+}
+
+QScrollBar::add-line:horizontal,
+QScrollBar::sub-line:horizontal {
+    width: 0;
+    height: 0;
+}
+
+QScrollBar::add-page:horizontal,
+QScrollBar::sub-page:horizontal {
+    background: transparent;
+}
+
+/* ---------- Поле наблюдений ---------- */
+
+QTextEdit#notesEdit {
+    background-color: #252526;
+    color: #ffffff;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    padding: 8px;
+    selection-background-color: #007acc;
+    selection-color: #ffffff;
+}
+
+QTextEdit#notesEdit:focus {
+    border: 2px solid #007acc;
+}
+
+/* ---------- Служебные элементы ---------- */
+
+QStatusBar {
+    background-color: #252526;
+    color: #cccccc;
+    border-top: 1px solid #3f3f46;
+}
+
+QToolTip {
+    background-color: #252526;
+    color: #ffffff;
+    border: 1px solid #3f3f46;
+    padding: 4px;
+}
