@@ -1,67 +1,75 @@
 /* ============================================================
-   YanZoo Widgets — тёмная тема.
-   Цветовая гамма из первого коммита:
-   фон #1e1e1e, поверхности #252526, акцент #007acc.
+   YanZoo — тёмная тема
+   ------------------------------------------------------------
+   Тема не привязана к именам объектов (#loginFrame и т.п.).
+   Стилизуются только типы виджетов и их роли через свойства:
+
+     QFrame[card="true"]      — карточка / поверхность
+     QFrame[avatar="true"]    — подложка аватара
+     QFrame[banner="true"]    — информационный баннер
+     QFrame[divider="true"]   — разделитель
+
+     QPushButton[accent="true"] — акцентная кнопка
+
+     QLabel[role="title"]       — заголовок
+     QLabel[role="section"]     — заголовок раздела
+     QLabel[role="subtitle"]    — подзаголовок
+     QLabel[role="caption"]     — подпись
+     QLabel[role="secondary"]   — второстепенный текст
+     QLabel[role="accent"]      — акцентный текст
+     QLabel[role="accentValue"] — акцентное значение
+     QLabel[role="avatar"]      — текст аватара
    ============================================================ */
 
+/* Палитра:
+   фон             #1e1e1e
+   поверхность     #252526
+   поверхность 2   #333337
+   граница         #3f3f46
+   текст           #ffffff
+   текст 2         #cccccc
+   акцент          #007acc
+*/
+
+/* ---------- Глобальные параметры ---------- */
 QWidget {
     color: #ffffff;
     font-family: "Roboto", "Segoe UI", sans-serif;
-    font-size: 11pt;
 }
 
+/* ---------- Фон окон и страниц ---------- */
 QMainWindow,
-QWidget#centralwidget,
-QFrame#topBar,
-QWidget#EnclosurePage,
-QWidget#AnimalPage,
-QWidget#FeedingPage {
+QDialog {
     background-color: #1e1e1e;
 }
 
+/* ---------- Текстовые роли ---------- */
 QLabel {
     background-color: transparent;
 }
 
-QLabel[role="title"] {
-    color: #ffffff;
-    font-size: 18pt;
-    font-weight: 700;
-}
-
+QLabel[role="title"],
 QLabel[role="section"] {
     color: #ffffff;
-    font-size: 11pt;
-    font-weight: 700;
 }
 
+QLabel[role="subtitle"],
+QLabel[role="caption"],
 QLabel[role="secondary"] {
     color: #cccccc;
 }
 
-QLabel[role="accent"] {
-    color: #4da3e0;
-    font-size: 9pt;
-}
-
-QLabel[role="accentValue"] {
-    color: #4da3e0;
-    font-size: 11pt;
-    font-weight: 700;
-}
-
+QLabel[role="accent"],
+QLabel[role="accentValue"],
 QLabel[role="avatar"] {
     color: #4da3e0;
-    font-size: 14pt;
-    font-weight: 700;
 }
 
 /* ---------- Карточки, баннеры, разделители ---------- */
-
 QFrame[card="true"] {
     background-color: #252526;
     border: 1px solid #3f3f46;
-    border-radius: 6px;
+    border-radius: 12px;
 }
 
 QFrame[avatar="true"] {
@@ -81,57 +89,44 @@ QFrame[divider="true"] {
     border: none;
 }
 
-QWidget#listCard {
-    background-color: transparent;
-}
-
-QLabel#cardTitleLabel {
+/* ---------- Поля ввода и текстовые области ---------- */
+QLineEdit,
+QTextEdit,
+QPlainTextEdit {
+    background-color: #252526;
     color: #ffffff;
-    font-size: 11pt;
+    border: 1px solid #3f3f46;
+    border-radius: 6px;
+    padding: 8px 12px;
+    selection-background-color: #007acc;
+    selection-color: #ffffff;
 }
 
-QLabel#cardSubtitleLabel {
-    color: #cccccc;
-    font-size: 9pt;
-}
-
-QLabel#cardArrowLabel {
-    color: #cccccc;
-    font-size: 18pt;
+QLineEdit:focus,
+QTextEdit:focus,
+QPlainTextEdit:focus {
+    border: 2px solid #007acc;
 }
 
 /* ---------- Кнопки ---------- */
-
 QPushButton {
     background-color: #333337;
     color: #ffffff;
     border: 1px solid #434346;
     border-radius: 4px;
-    padding: 6px 12px;
-    min-height: 20px;
+    padding: 10px 20px;
 }
 
 QPushButton:hover {
     background-color: #3f3f46;
 }
 
-QPushButton:pressed {
-    background-color: #007acc;
-    color: #ffffff;
-}
-
-QPushButton:checked {
-    background-color: #007acc;
-    border-color: #007acc;
-    color: #ffffff;
-    font-weight: 600;
-}
-
+QPushButton:pressed,
+QPushButton:checked,
 QPushButton[accent="true"] {
     background-color: #007acc;
     border-color: #007acc;
     color: #ffffff;
-    font-weight: 600;
 }
 
 QPushButton[accent="true"]:hover {
@@ -141,6 +136,7 @@ QPushButton[accent="true"]:hover {
 
 QPushButton[accent="true"]:pressed {
     background-color: #005a99;
+    border-color: #005a99;
 }
 
 QPushButton:disabled {
@@ -149,18 +145,12 @@ QPushButton:disabled {
     color: #777777;
 }
 
-QPushButton#settingsButton {
-    padding: 0;
-    border-radius: 4px;
-}
-
-/* ---------- Списки вольеров и животных ---------- */
-
+/* ---------- Списки ---------- */
 QListWidget {
     background-color: transparent;
     border: none;
-    padding: 0;
     outline: none;
+    padding: 0;
 }
 
 QListWidget::item {
@@ -177,22 +167,26 @@ QListWidget::item:hover {
 QListWidget::item:selected {
     background-color: #007acc;
     border: 2px solid #007acc;
+    color: #ffffff;
 }
 
-/* ---------- Рацион и прочие прокручиваемые области ---------- */
-
-QScrollArea {
+/* ---------- Прокручиваемые области ---------- */
+QScrollArea,
+QScrollArea > QWidget > QWidget {
     background-color: transparent;
     border: none;
 }
 
-QScrollArea > QWidget > QWidget {
-    background-color: transparent;
-}
-
+/* ---------- Полосы прокрутки ---------- */
 QScrollBar:vertical {
     background: transparent;
     width: 10px;
+    margin: 2px;
+}
+
+QScrollBar:horizontal {
+    background: transparent;
+    height: 10px;
     margin: 2px;
 }
 
@@ -202,66 +196,30 @@ QScrollBar::handle:vertical {
     min-height: 30px;
 }
 
-QScrollBar::handle:vertical:hover {
-    background-color: #007acc;
-}
-
-QScrollBar::add-line:vertical,
-QScrollBar::sub-line:vertical {
-    width: 0;
-    height: 0;
-}
-
-QScrollBar::add-page:vertical,
-QScrollBar::sub-page:vertical {
-    background: transparent;
-}
-
-QScrollBar:horizontal {
-    background: transparent;
-    height: 10px;
-    margin: 2px;
-}
-
 QScrollBar::handle:horizontal {
     background-color: #3f3f46;
     border-radius: 4px;
     min-width: 30px;
 }
 
+QScrollBar::handle:vertical:hover,
 QScrollBar::handle:horizontal:hover {
     background-color: #007acc;
 }
 
-QScrollBar::add-line:horizontal,
-QScrollBar::sub-line:horizontal {
+QScrollBar::add-line,
+QScrollBar::sub-line {
+    background: transparent;
     width: 0;
     height: 0;
 }
 
-QScrollBar::add-page:horizontal,
-QScrollBar::sub-page:horizontal {
+QScrollBar::add-page,
+QScrollBar::sub-page {
     background: transparent;
 }
 
-/* ---------- Поле наблюдений ---------- */
-
-QTextEdit#notesEdit {
-    background-color: #252526;
-    color: #ffffff;
-    border: 1px solid #3f3f46;
-    border-radius: 6px;
-    padding: 8px;
-    selection-background-color: #007acc;
-    selection-color: #ffffff;
-}
-
-QTextEdit#notesEdit:focus {
-    border: 2px solid #007acc;
-}
-
-/* ---------- Служебные элементы ---------- */
-
+/* ---------- Системные элементы ---------- */
 QStatusBar {
     background-color: #252526;
     color: #cccccc;
