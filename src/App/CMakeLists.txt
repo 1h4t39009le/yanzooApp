@@ -7,10 +7,16 @@ target_link_libraries(
 PRIVATE
     Qt6::Widgets
     uiLib
-	themeLib
+    themeLib
+    languageLib
     assetsLib
     Qt6::Svg
 )
+
+if(TARGET translations)
+    # .qm сразу собираются в ${YANZOO_TRANSLATIONS_DIR} рядом с exe.
+    add_dependencies(${PROJECT_NAME} translations)
+endif()
 
 if(WIN32)
 	add_custom_command(

@@ -2,6 +2,7 @@
 #include <QStyleFactory>
 #include <QString>
 
+#include "Language/LanguageManager.hpp"
 #include "Theme/ThemeManager.hpp"
 #include "UI/MainWindow.hpp"
 
@@ -15,6 +16,7 @@ int main(int argc, char *argv[])
     QApplication::setStyle(QStyleFactory::create(QStringLiteral("Fusion")));
 	
     ThemeManager::instance().applyTheme(ThemeManager::Light);
+    LanguageManager::instance().applySystemLanguage();
 	
     MainWindow window;
     window.show();

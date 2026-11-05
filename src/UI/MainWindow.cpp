@@ -1,6 +1,7 @@
 #include "MainWindow.hpp"
 #include "ui_MainWindow.h"
 #include <QDebug>
+#include "Language/LanguageManager.hpp"
 #include "Theme/ThemeManager.hpp"
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +14,11 @@ MainWindow::MainWindow(QWidget *parent)
 	
 	connect(ui->themeButton, &QPushButton::toggled, 
 		this, &MainWindow::onThemeButtonToggled);
+
+	connect(&LanguageManager::instance(), &LanguageManager::languageChanged,
+		this, [this](LanguageManager::Language) {
+			ui->retranslateUi(this);
+		});
 }
 
 MainWindow::~MainWindow() = default;

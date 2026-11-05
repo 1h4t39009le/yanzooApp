@@ -15,7 +15,9 @@ set(CMAKE_AUTOUIC ON)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+# lrelease складывает .qm сразу в подкаталог translations рядом с исполняемым файлом.
+set(YANZOO_TRANSLATIONS_DIR "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/translations")
 
 find_package(Qt6 REQUIRED COMPONENTS Widgets Sql Svg)
 
