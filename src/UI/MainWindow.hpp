@@ -18,7 +18,9 @@ public:
 	~MainWindow() override;
 private slots:
 	void onThemeButtonToggled(bool dark);
+	void onLanguageButtonClicked();
 private:
+	size_t m_langIdx=0;
     std::unique_ptr<Ui::MainWindow> ui;
 };
 

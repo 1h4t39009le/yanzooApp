@@ -1,49 +1,62 @@
-add_library(assetsLib INTERFACE)
-target_sources(assetsLib INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/app.qrc")
+add_library(assetsLib STATIC)
 
-# ---------- Переводы ----------
-set(I18N_TS_FILES
-    "${CMAKE_CURRENT_SOURCE_DIR}/i18n/yanzoo_ru.ts"
+# ICONS 
+set(ICON_FILES
+    "icons/angle-right.svg"
+    "icons/arrow-small-left.svg"
+    "icons/elephant.svg"
+    "icons/home.svg"
+    "icons/paw.svg"
+    "icons/settings-sliders.svg"
+    "icons/sun.svg"
+    "icons/user.svg"
+)
+foreach(file IN LISTS ICON_FILES)
+    get_filename_component(name_we ${file} NAME_WE)
+    set_source_files_properties(${file} PROPERTIES QT_RESOURCE_ALIAS ${name_we})
+endforeach()
+set_source_files_properties("icons/arrow-small-left.svg" PROPERTIES QT_RESOURCE_ALIAS "arrow-left")
+
+qt_add_resources(assetsLib "assetsLib_icons"
+    PREFIX "/icons"
+    FILES ${ICON_FILES}
 )
 
-# Qt6::lupdate / Qt6::lrelease — обычные импортированные исполняемые цели.
-# Специально не используем qt_add_translations (Qt 6.2+), чтобы не привязывать
-# сборку к версии Qt.
-find_package(Qt6 QUIET COMPONENTS LinguistTools)
+# THEMES
+set(THEME_FILES
+    "style/light.qss"
+    "style/dark.qss"
+)
+foreach(file IN LISTS THEME_FILES)
+    get_filename_component(name_we ${file} NAME_WE)
+    set_source_files_properties(${file} PROPERTIES QT_RESOURCE_ALIAS ${name_we})
+endforeach()
 
-if(TARGET Qt6::lupdate AND TARGET Qt6::lrelease)
-    # Ручное обновление .ts: cmake --build <build-dir> --target update_translations
-    add_custom_target(update_translations
-        COMMAND Qt6::lupdate
-            -no-obsolete
-            "${CMAKE_SOURCE_DIR}/src"
-            -ts ${I18N_TS_FILES}
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-        COMMENT "Обновление .ts файлов переводов"
-        VERBATIM
-    )
+qt_add_resources(assetsLib "assetsLib_themes"
+    PREFIX "/themes"
+    FILES ${THEME_FILES}
+)
 
-    set(I18N_QM_FILES)
-    foreach(ts_file IN LISTS I18N_TS_FILES)
-        get_filename_component(qm_name "${ts_file}" NAME_WE)
-        set(qm_file "${YANZOO_TRANSLATIONS_DIR}/${qm_name}.qm")
+# FONTS
+set_source_files_properties("fonts/Fredoka-VariableFont.ttf" PROPERTIES QT_RESOURCE_ALIAS "fredoka")
+set_source_files_properties("fonts/Roboto-Italic-VariableFont.ttf" PROPERTIES QT_RESOURCE_ALIAS "roboto-italic")
+set_source_files_properties("fonts/Roboto-VariableFont.ttf" PROPERTIES QT_RESOURCE_ALIAS "roboto")
 
-        add_custom_command(
-            OUTPUT "${qm_file}"
-            COMMAND "${CMAKE_COMMAND}" -E make_directory "${YANZOO_TRANSLATIONS_DIR}"
-            COMMAND Qt6::lrelease "${ts_file}" -qm "${qm_file}"
-            DEPENDS "${ts_file}"
-            COMMENT "Сборка ${qm_name}.qm"
-            VERBATIM
-        )
+qt_add_resources(assetsLib "assetsLib_fonts"
+    PREFIX "/fonts"
+    FILES
+        "fonts/Fredoka-VariableFont.ttf"
+        "fonts/Roboto-Italic-VariableFont.ttf"
+        "fonts/Roboto-VariableFont.ttf"
+)
 
-        list(APPEND I18N_QM_FILES "${qm_file}")
-    endforeach()
-
-    # Собирается вместе с проектом, чтобы .qm всегда были актуальны.
-    add_custom_target(translations ALL DEPENDS ${I18N_QM_FILES})
-else()
-    message(STATUS
-        "Qt LinguistTools не найден: цели update_translations/translations "
-        "отключены. Добавьте qttools в vcpkg.json для работы с переводами.")
-endif()
+# TRANSLATIONS
+find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
+qt_add_translations(assetsLib
+    TS_FILES
+        "${CMAKE_CURRENT_SOURCE_DIR}/i18n/yanzoo_ru.ts"
+    LUPDATE_OPTIONS
+        -no-obsolete
+    SOURCES
+        "${SRC_DIR}"
+)

@@ -8,6 +8,12 @@
 
 int main(int argc, char *argv[])
 {
+	Q_INIT_RESOURCE(assetsLib_icons);
+    Q_INIT_RESOURCE(assetsLib_themes);
+    Q_INIT_RESOURCE(assetsLib_fonts);
+	
+	Q_INIT_RESOURCE(assetsLib_translations);
+	
     QApplication app(argc, argv);
 	
     QApplication::setApplicationName(QStringLiteral("yanzoo App"));

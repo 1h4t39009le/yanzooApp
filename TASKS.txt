@@ -1,0 +1,6 @@
+#TASK1
+Изменить cmake build так чтобы у меня использовались функции из
+Qt 6.0 - 6.2 (2021)
+
+qt_add_resources вместо qrc
+qt_add_translation вместо custom_command

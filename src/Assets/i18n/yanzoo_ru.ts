@@ -14,17 +14,22 @@
         <translation>Сменить тему</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.ui" line="72"/>
+        <location filename="../../UI/MainWindow.ui" line="50"/>
+        <source>EN</source>
+        <translation>РУ</translation>
+    </message>
+    <message>
+        <location filename="../../UI/MainWindow.ui" line="84"/>
         <source>Sign In</source>
         <translation>Вход</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.ui" line="114"/>
+        <location filename="../../UI/MainWindow.ui" line="126"/>
         <source>Phone number...</source>
         <translation>Номер телефона...</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.ui" line="138"/>
+        <location filename="../../UI/MainWindow.ui" line="150"/>
         <source>Login</source>
         <translation>Войти</translation>
     </message>

@@ -13,11 +13,6 @@ PRIVATE
     Qt6::Svg
 )
 
-if(TARGET translations)
-    # .qm сразу собираются в ${YANZOO_TRANSLATIONS_DIR} рядом с exe.
-    add_dependencies(${PROJECT_NAME} translations)
-endif()
-
 if(WIN32)
 	add_custom_command(
 		TARGET ${PROJECT_NAME} POST_BUILD
