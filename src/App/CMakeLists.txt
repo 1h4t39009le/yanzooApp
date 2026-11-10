@@ -6,6 +6,7 @@ target_link_libraries(
     ${PROJECT_NAME}
 PRIVATE
     Qt6::Widgets
+	coreUserSessionLib
     uiLib
     themeLib
     languageLib
@@ -13,6 +14,7 @@ PRIVATE
     Qt6::Svg
 )
 
+#auto deploy
 if(WIN32)
 	add_custom_command(
 		TARGET ${PROJECT_NAME} POST_BUILD
@@ -25,6 +27,8 @@ if(WIN32)
 		VERBATIM
 	)
 endif()
+
+#cmake --build --preset=Debug --target=run
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
     add_custom_target(run
         COMMAND $<TARGET_FILE:${PROJECT_NAME}>

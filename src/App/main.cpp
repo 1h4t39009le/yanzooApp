@@ -5,14 +5,14 @@
 #include "Language/LanguageManager.hpp"
 #include "Theme/ThemeManager.hpp"
 #include "UI/MainWindow.hpp"
+#include "Core/UserSession/UserSession.hpp" // Подключаем наше Ядро сессий
 
 int main(int argc, char *argv[])
 {
-	Q_INIT_RESOURCE(assetsLib_icons);
+    Q_INIT_RESOURCE(assetsLib_icons);
     Q_INIT_RESOURCE(assetsLib_themes);
     Q_INIT_RESOURCE(assetsLib_fonts);
-	
-	Q_INIT_RESOURCE(assetsLib_translations);
+    Q_INIT_RESOURCE(assetsLib_translations);
 	
     QApplication app(argc, argv);
 	
@@ -23,8 +23,10 @@ int main(int argc, char *argv[])
 	
     ThemeManager::instance().applyTheme(ThemeManager::Light);
     LanguageManager::instance().applySystemLanguage();
-	
-    MainWindow window;
+
+    UserSession coreSession;
+
+    MainWindow window(&coreSession);
     window.show();
 	
     return app.exec();

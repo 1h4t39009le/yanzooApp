@@ -51,6 +51,8 @@ qt_add_resources(assetsLib "assetsLib_fonts"
 )
 
 # TRANSLATIONS
+# UPDATE TRANSLATIONS:
+# 	cmake --build --preset=Debug --target update_translations
 find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 qt_add_translations(assetsLib
     TS_FILES

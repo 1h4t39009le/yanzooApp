@@ -1,6 +1,6 @@
 set(SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR})
 add_subdirectory(Assets)
-#add_subdirectory(Core)
+add_subdirectory(Core)
 add_subdirectory(Theme)
 add_subdirectory(Language)
 add_subdirectory(UI)

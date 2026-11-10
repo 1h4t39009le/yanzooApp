@@ -10,17 +10,20 @@ namespace Ui {
 class MainWindow;
 }
 
+class UserSession; 
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(UserSession *session = nullptr, QWidget *parent = nullptr);
 	~MainWindow() override;
 private slots:
 	void onThemeButtonToggled(bool dark);
 	void onLanguageButtonClicked();
 private:
 	size_t m_langIdx=0;
+	UserSession *m_session;
     std::unique_ptr<Ui::MainWindow> ui;
 };
 
