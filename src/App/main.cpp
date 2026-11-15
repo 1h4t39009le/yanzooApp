@@ -4,7 +4,7 @@
 
 #include "Language/LanguageManager.hpp"
 #include "Theme/ThemeManager.hpp"
-#include "UI/MainWindow.hpp"
+#include "UI/Main/MainWindow.hpp"
 #include "Core/UserSession/UserSession.hpp" // Подключаем наше Ядро сессий
 
 int main(int argc, char *argv[])

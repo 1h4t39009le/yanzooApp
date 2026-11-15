@@ -2,6 +2,7 @@
 #define MAINWINDOW_HPP
 
 #include <QMainWindow>
+#include <QString>
 #include <memory>
 
 #include "Theme/ThemeManager.hpp"
@@ -21,7 +22,11 @@ public:
 private slots:
 	void onThemeButtonToggled(bool dark);
 	void onLanguageButtonClicked();
+	void onLoginRequested(const QString &login);
+	void onSignOutClicked();
 private:
+	void setSessionUiVisible(bool visible);
+
 	size_t m_langIdx=0;
 	UserSession *m_session;
     std::unique_ptr<Ui::MainWindow> ui;

@@ -10,59 +10,77 @@
     </message>
 </context>
 <context>
-    <name>MainWindow</name>
+    <name>Login</name>
     <message>
-        <location filename="../../UI/MainWindow.ui" line="14"/>
-        <source>yanzoo</source>
-        <translation>yanzoo</translation>
-    </message>
-    <message>
-        <location filename="../../UI/MainWindow.ui" line="56"/>
-        <source>Change theme</source>
-        <translation>Сменить тему</translation>
-    </message>
-    <message>
-        <location filename="../../UI/MainWindow.ui" line="71"/>
-        <source>EN</source>
-        <translation>РУ</translation>
-    </message>
-    <message>
-        <location filename="../../UI/MainWindow.ui" line="105"/>
+        <location filename="../../UI/Main/Pages/Login.ui" line="43"/>
         <source>Sign In</source>
         <translation>Вход</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.ui" line="147"/>
+        <location filename="../../UI/Main/Pages/Login.ui" line="85"/>
         <source>Login...</source>
         <translation>Логин...</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.ui" line="171"/>
+        <location filename="../../UI/Main/Pages/Login.ui" line="115"/>
         <source>Login</source>
         <translation>Войти</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.cpp" line="35"/>
+        <location filename="../../UI/Main/Pages/Login.cpp" line="42"/>
         <source>Input Error</source>
         <translation>Ошибка ввода</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.cpp" line="35"/>
+        <location filename="../../UI/Main/Pages/Login.cpp" line="43"/>
         <source>Please enter a valid login identifier.</source>
         <translation>Пожалуйста, введите корректный логин.</translation>
     </message>
+</context>
+<context>
+    <name>MainWindow</name>
     <message>
-        <location filename="../../UI/MainWindow.cpp" line="45"/>
-        <source>Success</source>
-        <translation>Успех</translation>
+        <location filename="../../UI/Main/MainWindow.ui" line="14"/>
+        <source>yanzoo</source>
+        <translation>yanzoo</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.cpp" line="45"/>
-        <source>Login successful. View layer registered.</source>
-        <translation>Вход успешно выполнен. Слой представления зарегистрирован.</translation>
+        <location filename="../../UI/Main/MainWindow.ui" line="80"/>
+        <source>YanZoo</source>
+        <translation>YanZoo</translation>
     </message>
     <message>
-        <location filename="../../UI/MainWindow.cpp" line="50"/>
+        <location filename="../../UI/Main/MainWindow.ui" line="93"/>
+        <source>Enter your login to continue</source>
+        <translation>Введите логин чтобы продолжить</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Main/MainWindow.ui" line="234"/>
+        <source>Keeper</source>
+        <translation>Кипер</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Main/MainWindow.ui" line="241"/>
+        <source>Signed in</source>
+        <translation>Вход выполнен</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Main/MainWindow.ui" line="265"/>
+        <source>Sign out</source>
+        <translation>Выйти</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Main/MainWindow.ui" line="294"/>
+        <source>Change theme</source>
+        <translation>Сменить тему</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Main/MainWindow.ui" line="313"/>
+        <source>EN</source>
+        <translation>РУ</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Main/MainWindow.cpp" line="54"/>
         <source>Authorization Error</source>
         <translation>Ошибка авторизации</translation>
     </message>
