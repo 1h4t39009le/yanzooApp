@@ -70,12 +70,12 @@
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../../UI/Main/MainWindow.ui" line="294"/>
+        <location filename="../../UI/Main/MainWindow.ui" line="297"/>
         <source>Change theme</source>
         <translation>Сменить тему</translation>
     </message>
     <message>
-        <location filename="../../UI/Main/MainWindow.ui" line="313"/>
+        <location filename="../../UI/Main/MainWindow.ui" line="316"/>
         <source>EN</source>
         <translation>РУ</translation>
     </message>

@@ -186,6 +186,11 @@ QPushButton[accent="true"]:pressed {
     border-color: #0369a1;
 }
 
+QPushButton[iconName="signOut"] {
+    qproperty-icon: url(:/icons/dark/arrow-left);
+    qproperty-iconSize: 16px 16px;
+}
+
 /* ---------- Списки ---------- */
 QListWidget {
     background: transparent;

@@ -264,6 +264,9 @@
          <property name="text">
           <string>Sign out</string>
          </property>
+         <property name="iconName" stdset="0">
+          <string notr="true">signOut</string>
+         </property>
         </widget>
        </item>
        <item>

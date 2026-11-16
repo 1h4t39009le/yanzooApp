@@ -1,21 +1,36 @@
 add_library(assetsLib STATIC)
 
-# ICONS 
-set(ICON_FILES
-    "icons/angle-right.svg"
-    "icons/arrow-small-left.svg"
-    "icons/elephant.svg"
-    "icons/home.svg"
-    "icons/paw.svg"
-    "icons/settings-sliders.svg"
-    "icons/sun.svg"
-    "icons/user.svg"
+# ICONS
+set(ICON_FILES_LIGHT
+    "icons/light/angle-right.svg"
+    "icons/light/arrow-left.svg"
+    "icons/light/elephant.svg"
+    "icons/light/home.svg"
+    "icons/light/paw.svg"
+    "icons/light/settings-sliders.svg"
+    "icons/light/sun.svg"
+    "icons/light/user.svg"
 )
-foreach(file IN LISTS ICON_FILES)
+set(ICON_FILES_DARK
+    "icons/dark/angle-right.svg"
+    "icons/dark/arrow-left.svg"
+    "icons/dark/elephant.svg"
+    "icons/dark/home.svg"
+    "icons/dark/paw.svg"
+    "icons/dark/settings-sliders.svg"
+    "icons/dark/sun.svg"
+    "icons/dark/user.svg"
+)
+set(ICON_FILES ${ICON_FILES_LIGHT} ${ICON_FILES_DARK})
+
+foreach(file IN LISTS ICON_FILES_LIGHT)
     get_filename_component(name_we ${file} NAME_WE)
-    set_source_files_properties(${file} PROPERTIES QT_RESOURCE_ALIAS ${name_we})
+    set_source_files_properties(${file} PROPERTIES QT_RESOURCE_ALIAS "light/${name_we}")
 endforeach()
-set_source_files_properties("icons/arrow-small-left.svg" PROPERTIES QT_RESOURCE_ALIAS "arrow-left")
+foreach(file IN LISTS ICON_FILES_DARK)
+    get_filename_component(name_we ${file} NAME_WE)
+    set_source_files_properties(${file} PROPERTIES QT_RESOURCE_ALIAS "dark/${name_we}")
+endforeach()
 
 qt_add_resources(assetsLib "assetsLib_icons"
     PREFIX "/icons"
