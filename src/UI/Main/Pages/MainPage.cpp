@@ -6,6 +6,7 @@
 #include "Login.hpp"
 #include "Language/LanguageManager.hpp"
 #include "Theme/ThemeManager.hpp"
+#include "Core/UserSession/KeeperAccessView.hpp"
 #include "Core/UserSession/UserSession.hpp"
 
 MainPage::MainPage(QWidget *parent)
@@ -49,13 +50,19 @@ void MainPage::setSession(UserSession *session)
     }
 
     // Handle successful authentication notifications
-    connect(m_session, &UserSession::loginEnded, this, [this](RoleAccessView *) {
+    connect(m_session, &UserSession::loginEnded, this, [this](RoleAccessView *view) {
         ui->loginPage->setLoginInProgress(false);
         ui->loginPage->resetForm();
         setSessionUiVisible(true);
-        // Пока роль всегда «Кипер». Страницы роли получают данные из
-        // фейкового списка KeeperData, без обращения к Core.
-        ui->roleStack->setCurrentWidget(ui->keeperPage);
+
+        // Роутинг по роли: конкретную вьюху достаём dynamic_cast'ом и
+        // отдаём соответствующей странице. Неизвестная роль — заглушка.
+        if (auto *keeper = dynamic_cast<KeeperAccessView *>(view)) {
+            ui->keeperPage->setAccess(keeper);
+            ui->roleStack->setCurrentWidget(ui->keeperPage);
+        } else {
+            ui->roleStack->setCurrentWidget(ui->welcomePage);
+        }
     });
 
     // Handle active database authorization or networking exceptions
@@ -98,8 +105,10 @@ void MainPage::onLoginRequested(const QString &login)
 
 void MainPage::onSignOutClicked()
 {
-    // Сессия должна отпустить вьюху и сотрудника, иначе следующий вход
-    // получит данные предыдущего пользователя.
+    // Сначала отцепляем UI от вьюхи: logout() удалит её через deleteLater(),
+    // и виджет не должен остаться с висячим указателем.
+    ui->keeperPage->setAccess(nullptr);
+
     if (m_session) {
         m_session->logout();
     }

@@ -83,34 +83,47 @@
 <context>
     <name>KeeperAccessView</name>
     <message>
-        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="37"/>
-        <source>Animals: %1</source>
-        <translation>Животных: %1</translation>
-    </message>
-    <message>
-        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="45"/>
+        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="43"/>
         <source>Failed to load enclosures list: %1</source>
         <translation>Не удалось загрузить список вольеров: %1</translation>
     </message>
     <message>
-        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="76"/>
+        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="74"/>
         <source>Failed to load enclosure animals: %1</source>
         <translation>Не удалось загрузить список животных вольера: %1</translation>
     </message>
     <message>
-        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="114"/>
+        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="112"/>
         <source>Failed to load animal details: %1</source>
         <translation>Не удалось загрузить подробные данные животного: %1</translation>
     </message>
     <message>
-        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="136"/>
+        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="134"/>
         <source>Failed to load ration composition: %1</source>
         <translation>Не удалось загрузить состав рациона: %1</translation>
     </message>
     <message>
-        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="164"/>
+        <location filename="../../Core/UserSession/KeeperAccessView.cpp" line="162"/>
         <source>Failed to register feeding: %1</source>
         <translation>Не удалось зарегистрировать факт кормления: %1</translation>
+    </message>
+</context>
+<context>
+    <name>AnimalsPage</name>
+    <message>
+        <location filename="../../UI/Roles/Keeper/Pages/AnimalsPage.ui" line="40"/>
+        <source>Animals</source>
+        <translation>Животные</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Roles/Keeper/Pages/AnimalsPage.ui" line="56"/>
+        <source>No animals in this enclosure</source>
+        <translation>В этом вольере нет животных</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Roles/Keeper/Pages/AnimalsPage.cpp" line="78"/>
+        <source>%1, age %2, fed %3 h ago</source>
+        <translation>%1, возраст %2, кормили %3 ч назад</translation>
     </message>
 </context>
 <context>
@@ -142,6 +155,11 @@
         <location filename="../../UI/Roles/Keeper/MainWidget.ui" line="63"/>
         <source>Back</source>
         <translation>Назад</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Roles/Keeper/MainWidget.cpp" line="45"/>
+        <source>Data Error</source>
+        <translation>Ошибка данных</translation>
     </message>
 </context>
 <context>

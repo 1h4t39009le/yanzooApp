@@ -4,12 +4,10 @@
 #include <QList>
 #include <QString>
 
-// Временный источник данных роли «Кипер».
+// Представление данных роли «Кипер» на стороне UI.
 //
-// Сейчас это обычный фейковый список, который MainWidget отдаёт страницам.
-// Когда появится реальная работа с БД, KeeperData заменит
-// Core/UserSession/KeeperAccessView, а интерфейс страниц останется прежним:
-// им по-прежнему будет приходить готовый список через setEnclosures().
+// Источник — Core/UserSession/KeeperAccessView. Страницы получают готовый
+// список через setEnclosures() и не зависят от Core напрямую.
 //
 // Данные намеренно не содержат готовых подписей: количество животных — это
 // число, а "Animals: %1" собирает страница в момент отрисовки. Иначе строка
@@ -22,8 +20,13 @@ struct EnclosureInfo {
     int animalCount = 0;
 };
 
-// Список вольеров, закреплённых за текущим сотрудником.
-QList<EnclosureInfo> enclosures();
+struct AnimalInfo {
+    int id = 0;
+    QString species;
+    QString nickname;
+    int age = 0;
+    int hoursSinceFed = 0;
+};
 
 } // namespace KeeperData
 

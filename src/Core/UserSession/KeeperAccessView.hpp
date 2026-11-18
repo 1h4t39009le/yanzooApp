@@ -13,7 +13,7 @@ public:
     struct EnclosureInfo {
         int id;
         QString name;
-        QString countText;
+        int count;
         int maxHoursSinceFed;
     };
 

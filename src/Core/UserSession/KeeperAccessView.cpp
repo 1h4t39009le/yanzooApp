@@ -32,8 +32,7 @@ void KeeperAccessView::refreshData() {
             EnclosureInfo enc;
             enc.id = query.value("enclosure_id").toInt();
             enc.name = query.value("name").toString();
-            // Логика форматирования строки с количеством животных
-            enc.countText = tr("Animals: %1").arg(query.value("animal_count").toInt());
+            enc.count = query.value("animal_count").toInt();
             enc.maxHoursSinceFed = query.value("max_hours_since_fed").toInt();
             newList.append(enc);
         }

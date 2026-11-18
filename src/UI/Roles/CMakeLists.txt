@@ -7,13 +7,16 @@ target_sources(${LIBRARY_NAME} PRIVATE
 	Keeper/MainWidget.hpp
 	Keeper/MainWidget.cpp
 	Keeper/MainWidget.ui
-	#KeeperData (временный фейковый источник данных)
+	#KeeperData (UI-представление данных роли)
 	Keeper/KeeperData.hpp
-	Keeper/KeeperData.cpp
 	#Pages/EnclosurePage
 	Keeper/Pages/EnclosurePage.hpp
 	Keeper/Pages/EnclosurePage.cpp
 	Keeper/Pages/EnclosurePage.ui
+	#Pages/AnimalsPage
+	Keeper/Pages/AnimalsPage.hpp
+	Keeper/Pages/AnimalsPage.cpp
+	Keeper/Pages/AnimalsPage.ui
 ##Vet
 	#...
 )
