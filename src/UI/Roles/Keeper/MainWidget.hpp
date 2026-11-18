@@ -9,6 +9,7 @@
 
 class AnimalsPage;
 class EnclosurePage;
+class FeedingPage;
 
 namespace Ui {
 class KeeperMainWidget;
@@ -29,8 +30,11 @@ public:
 private slots:
     void onEnclosureSelected(int enclosureId);
     void onAnimalSelected(int animalId);
+    void onFeedingRequested(int animalId, const QString &notes);
     void onEnclosuresRefreshed(const QList<KeeperAccessView::EnclosureInfo> &enclosures);
     void onAnimalsLoaded(const QList<KeeperAccessView::AnimalInfo> &animals);
+    void onAnimalDetailsLoaded(const KeeperAccessView::AnimalFullDetails &animal,
+                               const QList<KeeperAccessView::RationIngredient> &ration);
 
 protected:
     void retranslateUi() override;
@@ -43,6 +47,7 @@ private:
     std::unique_ptr<Ui::KeeperMainWidget> ui;
     EnclosurePage *m_enclosurePage = nullptr;
     AnimalsPage *m_animalsPage = nullptr;
+    FeedingPage *m_feedingPage = nullptr;
     KeeperAccessView *m_access = nullptr;
 };
 

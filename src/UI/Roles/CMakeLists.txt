@@ -17,6 +17,10 @@ target_sources(${LIBRARY_NAME} PRIVATE
 	Keeper/Pages/AnimalsPage.hpp
 	Keeper/Pages/AnimalsPage.cpp
 	Keeper/Pages/AnimalsPage.ui
+	#Pages/FeedingPage
+	Keeper/Pages/FeedingPage.hpp
+	Keeper/Pages/FeedingPage.cpp
+	Keeper/Pages/FeedingPage.ui
 ##Vet
 	#...
 )

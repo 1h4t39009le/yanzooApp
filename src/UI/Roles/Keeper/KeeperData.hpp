@@ -24,8 +24,21 @@ struct AnimalInfo {
     int id = 0;
     QString species;
     QString nickname;
+    QString gender;
     int age = 0;
     int hoursSinceFed = 0;
+};
+
+struct AnimalDetails {
+    AnimalInfo base;
+    QString feedingFrequency;
+    int fedTodayCount = 0;
+    QString rationName;
+};
+
+struct RationIngredient {
+    QString name;
+    QString amountWithUnit;
 };
 
 } // namespace KeeperData
