@@ -186,9 +186,33 @@ QPushButton[accent="true"]:pressed {
     border-color: #0369a1;
 }
 
-QPushButton[iconName="signOut"] {
+QPushButton[iconName="arrow-left"] {
     qproperty-icon: url(:/icons/light/arrow-left);
     qproperty-iconSize: 16px 16px;
+}
+
+QPushButton[iconName="sun"] {
+    qproperty-icon: url(:/icons/light/sun);
+    qproperty-iconSize: 16px 16px;
+}
+
+QPushButton[iconName="settings-sliders"] {
+    qproperty-icon: url(:/icons/light/settings-sliders);
+    qproperty-iconSize: 16px 16px;
+}
+
+QPushButton[iconName="angle-right"] {
+    qproperty-icon: url(:/icons/light/angle-right);
+    qproperty-iconSize: 16px 16px;
+}
+
+/* ---------- Иконки в карточках списка ---------- */
+QLabel[role="icon"] {
+    qproperty-scaledContents: true;
+}
+
+QLabel[iconName="angle-right"] {
+    qproperty-pixmap: url(:/icons/light/angle-right);
 }
 
 /* ---------- Списки ---------- */

@@ -4,6 +4,9 @@ target_sources(${LIBRARY_NAME} PRIVATE
 	MainWindow.cpp
 	MainWindow.ui
 	#Pages
+	Pages/MainPage.hpp
+	Pages/MainPage.cpp
+	Pages/MainPage.ui
 	Pages/Login.hpp
 	Pages/Login.cpp
 	Pages/Login.ui

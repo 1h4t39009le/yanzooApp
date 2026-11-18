@@ -1,15 +1,14 @@
-#ifndef USERKEEPERVIEW_HPP
-#define USERKEEPERVIEW_HPP
+#ifndef KEEPERACCESSVIEW_HPP
+#define KEEPERACCESSVIEW_HPP
 
-#include "BaseDbController.hpp"
+#include "RoleAccessView.hpp"
+
 #include <QList>
 #include <QString>
 
-class UserKeeperView : public BaseDbController {
+class KeeperAccessView : public RoleAccessView {
     Q_OBJECT
 public:
-    using EmployeeID = int64_t;
-
     // Сначала полностью определяем тела структур внутри класса
     struct EnclosureInfo {
         int id;
@@ -41,7 +40,7 @@ public:
     };
 
     // Теперь компилятор знает их точный размер и может использовать в методах
-    explicit UserKeeperView(QObject *parent, EmployeeID empid, QSqlDatabase db);
+    explicit KeeperAccessView(QObject *parent, EmployeeID empid, QSqlDatabase db);
 
     QList<EnclosureInfo> enclosures() const { return m_enclosures; }
     QList<AnimalInfo> animals() const { return m_animals; }
@@ -49,9 +48,9 @@ public:
     QList<RationIngredient> currentRationDetails() const { return m_currentRationDetails; }
 
 signals:
-    void enclosuresRefreshed(const QList<UserKeeperView::EnclosureInfo> &enclosures);
-    void animalsLoaded(const QList<UserKeeperView::AnimalInfo> &animals);
-    void animalDetailsLoaded(const UserKeeperView::AnimalFullDetails &animal, const QList<UserKeeperView::RationIngredient> &ration);
+    void enclosuresRefreshed(const QList<KeeperAccessView::EnclosureInfo> &enclosures);
+    void animalsLoaded(const QList<KeeperAccessView::AnimalInfo> &animals);
+    void animalDetailsLoaded(const KeeperAccessView::AnimalFullDetails &animal, const QList<KeeperAccessView::RationIngredient> &ration);
     void feedingRegistered();
 
 public slots:
@@ -63,7 +62,6 @@ public slots:
 private:
     QList<RationIngredient> getRationDetails(int rationId);
 
-    EmployeeID m_employeeId;
     int m_selectedEnclosureId;
     
     QList<EnclosureInfo> m_enclosures;
@@ -72,6 +70,4 @@ private:
     QList<RationIngredient> m_currentRationDetails;
 };
 
-Q_DECLARE_METATYPE(UserKeeperView*)
-
-#endif // USERKEEPERVIEW_HPP
+#endif // KEEPERACCESSVIEW_HPP

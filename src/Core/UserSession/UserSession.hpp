@@ -1,11 +1,12 @@
 #ifndef USERSESSION_HPP
 #define USERSESSION_HPP
 
-#include "BaseDbController.hpp" // Наследуемся от базового класса
-#include <QVariant>
+#include "DbAccessController.hpp" // Наследуемся от базового класса
 #include <cstdint>
 
-class UserSession : public BaseDbController {
+class RoleAccessView;
+
+class UserSession : public DbAccessController {
     Q_OBJECT
 public:
     using EmployeeID = int64_t;
@@ -14,17 +15,19 @@ public:
     explicit UserSession(QObject *parent = nullptr);
 
 signals:
-    void loginEnded(const QVariant &view);
-    // errorOccurred удален, он уже есть в BaseDbController
+    // Отдаём базовый тип роли: конкретную вьюху подписчик достаёт dynamic_cast'ом.
+    void loginEnded(RoleAccessView *view);
+    // errorOccurred удален, он уже есть в DbAccessController
 
 public slots:
     void requestLogin(const QString &login);
+    void logout();
 
 private:
-    QVariant createViewForEmployee(EmployeeID empId); 
+    RoleAccessView *createViewForEmployee(EmployeeID empId); 
 
     EmployeeID m_employeeId;
-    QVariant m_view;
+    RoleAccessView *m_view = nullptr;
     // m_db и ensureOpen() удалены, они унаследованы из базы
 };
 

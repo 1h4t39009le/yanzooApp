@@ -2,10 +2,10 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
-#include "UserKeeperView.hpp" 
+#include "KeeperAccessView.hpp" 
 
 UserSession::UserSession(QObject *parent) : 
-    BaseDbController(QSqlDatabase::addDatabase("QODBC", "YanZooDbConnection"), parent),
+    DbAccessController(QSqlDatabase::addDatabase("QODBC", "YanZooDbConnection"), parent),
     m_employeeId{-1}
 {
     QString connectionString =
@@ -44,7 +44,17 @@ void UserSession::requestLogin(const QString &login) {
     }
 }
 
-QVariant UserSession::createViewForEmployee(EmployeeID empId) {
-    UserKeeperView* keeperView = new UserKeeperView(this, empId, m_db);
-    return QVariant::fromValue(keeperView);
+RoleAccessView *UserSession::createViewForEmployee(EmployeeID empId) {
+    KeeperAccessView* keeperView = new KeeperAccessView(this, empId, m_db);
+    return keeperView;
+}
+
+void UserSession::logout() {
+    if (m_view) {
+        // Родитель — эта сессия, поэтому удаляем отложенно: UI мог ещё
+        // держать указатель до переключения на страницу входа.
+        m_view->deleteLater();
+        m_view = nullptr;
+    }
+    m_employeeId = -1;
 }

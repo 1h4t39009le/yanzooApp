@@ -1,10 +1,11 @@
 add_library(coreUserSessionLib STATIC
     UserSession.cpp
     UserSession.hpp
-    BaseDbController.cpp
-    BaseDbController.hpp
-    UserKeeperView.cpp
-    UserKeeperView.hpp
+    DbAccessController.cpp
+    DbAccessController.hpp
+    RoleAccessView.hpp
+    KeeperAccessView.cpp
+    KeeperAccessView.hpp
 )
 
 target_link_libraries(coreUserSessionLib PUBLIC

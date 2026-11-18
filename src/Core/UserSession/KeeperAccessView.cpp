@@ -1,18 +1,17 @@
-#include "UserKeeperView.hpp"
+#include "KeeperAccessView.hpp"
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QVariant>
 #include <QDateTime>
 #include <QDebug>
 
-UserKeeperView::UserKeeperView(QObject *parent, EmployeeID empid, QSqlDatabase db)
-    : BaseDbController(db, parent)
-    , m_employeeId(empid)
+KeeperAccessView::KeeperAccessView(QObject *parent, EmployeeID empid, QSqlDatabase db)
+    : RoleAccessView(parent, empid, db)
     , m_selectedEnclosureId(-1)
 {
 }
 
-void UserKeeperView::refreshData() {
+void KeeperAccessView::refreshData() {
     if (!ensureOpen()) return;
 
     QList<EnclosureInfo> newList;
@@ -26,7 +25,7 @@ void UserKeeperView::refreshData() {
         "WHERE k.employee_id = :empId";
 
     query.prepare(sqlQuery);
-    query.bindValue(":empId", static_cast<qlonglong>(m_employeeId));
+    query.bindValue(":empId", static_cast<qlonglong>(employeeId()));
 
     if (query.exec()) {
         while (query.next()) {
@@ -47,7 +46,7 @@ void UserKeeperView::refreshData() {
     }
 }
 
-void UserKeeperView::selectEnclosure(int enclosureId) {
+void KeeperAccessView::selectEnclosure(int enclosureId) {
     m_selectedEnclosureId = enclosureId;
     if (!ensureOpen()) return;
 
@@ -78,7 +77,7 @@ void UserKeeperView::selectEnclosure(int enclosureId) {
     }
 }
 
-void UserKeeperView::selectAnimal(int animalId) {
+void KeeperAccessView::selectAnimal(int animalId) {
     if (!ensureOpen()) return;
 
     QSqlQuery query(m_db);
@@ -116,7 +115,7 @@ void UserKeeperView::selectAnimal(int animalId) {
     }
 }
 
-QList<UserKeeperView::RationIngredient> UserKeeperView::getRationDetails(int rationId) {
+QList<KeeperAccessView::RationIngredient> KeeperAccessView::getRationDetails(int rationId) {
     QList<RationIngredient> list;
     QSqlQuery query(m_db);
     QString sqlQuery = "SELECT feed_name, amount, unit FROM RationDetail WHERE ration_id = :ratId";
@@ -139,7 +138,7 @@ QList<UserKeeperView::RationIngredient> UserKeeperView::getRationDetails(int rat
     return list;
 }
 
-void UserKeeperView::registerFeeding(int animalId, const QString &notes) {
+void KeeperAccessView::registerFeeding(int animalId, const QString &notes) {
     if (!ensureOpen()) return;
 
     QSqlQuery query(m_db);
@@ -147,7 +146,7 @@ void UserKeeperView::registerFeeding(int animalId, const QString &notes) {
                   "VALUES (:animalId, :empId, GETDATE(), :notes)");
 
     query.bindValue(":animalId", animalId);
-    query.bindValue(":empId", static_cast<qlonglong>(m_employeeId)); // Связываем с текущим залогиненным сотрудником
+    query.bindValue(":empId", static_cast<qlonglong>(employeeId())); // Связываем с текущим залогиненным сотрудником
     query.bindValue(":notes", notes.isEmpty()
                                  ? QVariant(QMetaType(QMetaType::QString))
                                  : QVariant(notes));

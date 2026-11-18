@@ -1,13 +1,13 @@
-#include "BaseDbController.hpp"
+#include "DbAccessController.hpp"
 #include <QSqlError>
 
-BaseDbController::BaseDbController(QSqlDatabase db, QObject *parent)
+DbAccessController::DbAccessController(QSqlDatabase db, QObject *parent)
     : QObject(parent)
     , m_db(db)
 {
 }
 
-bool BaseDbController::ensureOpen() {
+bool DbAccessController::ensureOpen() {
     if (m_db.isOpen()) {
         return true;
     }

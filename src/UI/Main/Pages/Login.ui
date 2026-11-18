@@ -114,6 +114,9 @@
            <property name="text">
             <string>Login</string>
            </property>
+           <property name="iconName" stdset="0">
+            <string notr="true">angle-right</string>
+           </property>
           </widget>
          </item>
         </layout>
