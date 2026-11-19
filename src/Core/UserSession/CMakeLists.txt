@@ -6,6 +6,8 @@ add_library(coreUserSessionLib STATIC
     RoleAccessView.hpp
     KeeperAccessView.cpp
     KeeperAccessView.hpp
+    VetAccessView.cpp
+    VetAccessView.hpp
 )
 
 target_link_libraries(coreUserSessionLib PUBLIC

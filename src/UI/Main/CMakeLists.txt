@@ -2,7 +2,6 @@ target_sources(${LIBRARY_NAME} PRIVATE
 	#MainWindow
 	MainWindow.hpp
 	MainWindow.cpp
-	MainWindow.ui
 	#Pages
 	Pages/MainPage.hpp
 	Pages/MainPage.cpp
