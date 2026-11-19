@@ -7,6 +7,7 @@
 #include "Language/LanguageManager.hpp"
 #include "Theme/ThemeManager.hpp"
 #include "Core/UserSession/KeeperAccessView.hpp"
+#include "Core/UserSession/VetAccessView.hpp"
 #include "Core/UserSession/UserSession.hpp"
 
 MainPage::MainPage(QWidget *parent)
@@ -60,6 +61,9 @@ void MainPage::setSession(UserSession *session)
         if (auto *keeper = dynamic_cast<KeeperAccessView *>(view)) {
             ui->keeperPage->setAccess(keeper);
             ui->roleStack->setCurrentWidget(ui->keeperPage);
+        } else if (auto *vet = dynamic_cast<VetAccessView *>(view)) {
+            ui->vetPage->setAccess(vet);
+            ui->roleStack->setCurrentWidget(ui->vetPage);
         } else {
             ui->roleStack->setCurrentWidget(ui->welcomePage);
         }
@@ -108,6 +112,7 @@ void MainPage::onSignOutClicked()
     // Сначала отцепляем UI от вьюхи: logout() удалит её через deleteLater(),
     // и виджет не должен остаться с висячим указателем.
     ui->keeperPage->setAccess(nullptr);
+    ui->vetPage->setAccess(nullptr);
 
     if (m_session) {
         m_session->logout();

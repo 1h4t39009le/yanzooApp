@@ -23,6 +23,24 @@ VetAccessView::AnimalInfo VetAccessView::readAnimal(const QSqlQuery &query) cons
     return animal;
 }
 
+QList<VetAccessView::MedicalEventInfo> VetAccessView::readMedicalEvents(QSqlQuery &query) const
+{
+    QList<MedicalEventInfo> events;
+    while (query.next()) {
+        MedicalEventInfo event;
+        event.eventId = query.value("event_id").toInt();
+        event.employeeId = query.value("employee_id").toInt();
+        event.animalId = query.value("animal_id").toInt();
+        event.date = query.value("date").toDateTime();
+        event.type = query.value("type").toString();
+        event.nickname = query.value("nickname").toString();
+        event.species = query.value("species").toString();
+        event.age = query.value("age").toInt();
+        events.append(event);
+    }
+    return events;
+}
+
 void VetAccessView::refreshAnimals()
 {
     if (!ensureOpen()) return;
@@ -73,27 +91,33 @@ void VetAccessView::refreshMedicalEvents()
 {
     if (!ensureOpen()) return;
 
-    QList<MedicalEventInfo> newList;
     QSqlQuery query(m_db);
     query.prepare("SELECT * FROM UserMedEvtView ORDER BY date DESC, event_id DESC");
 
     if (query.exec()) {
-        while (query.next()) {
-            MedicalEventInfo event;
-            event.eventId = query.value("event_id").toInt();
-            event.employeeId = query.value("employee_id").toInt();
-            event.animalId = query.value("animal_id").toInt();
-            event.date = query.value("date").toDateTime();
-            event.type = query.value("type").toString();
-            event.nickname = query.value("nickname").toString();
-            event.species = query.value("species").toString();
-            event.age = query.value("age").toInt();
-            newList.append(event);
-        }
-        m_medicalEvents = newList;
+        m_medicalEvents = readMedicalEvents(query);
         emit medicalEventsLoaded(m_medicalEvents);
     } else {
         emit errorOccurred(tr("Failed to load medical events: %1")
+                               .arg(query.lastError().text()));
+    }
+}
+
+void VetAccessView::refreshAssignedMedicalEvents()
+{
+    if (!ensureOpen()) return;
+
+    QSqlQuery query(m_db);
+    query.prepare("SELECT * FROM UserMedEvtView "
+                  "WHERE employee_id = :empId "
+                  "ORDER BY date DESC, event_id DESC");
+    query.bindValue(":empId", static_cast<qlonglong>(employeeId()));
+
+    if (query.exec()) {
+        m_medicalEvents = readMedicalEvents(query);
+        emit medicalEventsLoaded(m_medicalEvents);
+    } else {
+        emit errorOccurred(tr("Failed to load assigned medical events: %1")
                                .arg(query.lastError().text()));
     }
 }
@@ -102,7 +126,6 @@ void VetAccessView::loadMedicalEvents(int animalId)
 {
     if (!ensureOpen()) return;
 
-    QList<MedicalEventInfo> newList;
     QSqlQuery query(m_db);
     query.prepare("SELECT * FROM UserMedEvtView "
                   "WHERE animal_id = :animId "
@@ -110,19 +133,7 @@ void VetAccessView::loadMedicalEvents(int animalId)
     query.bindValue(":animId", animalId);
 
     if (query.exec()) {
-        while (query.next()) {
-            MedicalEventInfo event;
-            event.eventId = query.value("event_id").toInt();
-            event.employeeId = query.value("employee_id").toInt();
-            event.animalId = query.value("animal_id").toInt();
-            event.date = query.value("date").toDateTime();
-            event.type = query.value("type").toString();
-            event.nickname = query.value("nickname").toString();
-            event.species = query.value("species").toString();
-            event.age = query.value("age").toInt();
-            newList.append(event);
-        }
-        m_medicalEvents = newList;
+        m_medicalEvents = readMedicalEvents(query);
         emit medicalEventsLoaded(m_medicalEvents);
     } else {
         emit errorOccurred(tr("Failed to load animal medical events: %1")

@@ -47,6 +47,29 @@
     </message>
 </context>
 <context>
+    <name>EventsPage</name>
+    <message>
+        <location filename="../../UI/Roles/Vet/Pages/EventsPage.ui" line="40"/>
+        <source>Assigned medical events</source>
+        <translation>Назначенные мероприятия</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Roles/Vet/Pages/EventsPage.ui" line="56"/>
+        <source>No medical events assigned</source>
+        <translation>Мероприятия не назначены</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Roles/Vet/Pages/EventsPage.cpp" line="44"/>
+        <source>%1: %2</source>
+        <translation>%1: %2</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Roles/Vet/Pages/EventsPage.cpp" line="45"/>
+        <source>%1, %2, %3 years</source>
+        <translation>%1, %2, %3 лет</translation>
+    </message>
+</context>
+<context>
     <name>FeedingPage</name>
     <message>
         <location filename="../../UI/Roles/Keeper/Pages/FeedingPage.ui" line="45"/>
@@ -229,32 +252,32 @@
         <translation>Введите логин чтобы продолжить</translation>
     </message>
     <message>
-        <location filename="../../UI/Main/Pages/MainPage.ui" line="231"/>
+        <location filename="../../UI/Main/Pages/MainPage.ui" line="232"/>
         <source>Keeper</source>
         <translation>Кипер</translation>
     </message>
     <message>
-        <location filename="../../UI/Main/Pages/MainPage.ui" line="238"/>
+        <location filename="../../UI/Main/Pages/MainPage.ui" line="239"/>
         <source>Signed in</source>
         <translation>Вход выполнен</translation>
     </message>
     <message>
-        <location filename="../../UI/Main/Pages/MainPage.ui" line="262"/>
+        <location filename="../../UI/Main/Pages/MainPage.ui" line="263"/>
         <source>Sign out</source>
         <translation>Выйти</translation>
     </message>
     <message>
-        <location filename="../../UI/Main/Pages/MainPage.ui" line="294"/>
+        <location filename="../../UI/Main/Pages/MainPage.ui" line="295"/>
         <source>Change theme</source>
         <translation>Сменить тему</translation>
     </message>
     <message>
-        <location filename="../../UI/Main/Pages/MainPage.ui" line="316"/>
+        <location filename="../../UI/Main/Pages/MainPage.ui" line="317"/>
         <source>EN</source>
         <translation>РУ</translation>
     </message>
     <message>
-        <location filename="../../UI/Main/Pages/MainPage.cpp" line="71"/>
+        <location filename="../../UI/Main/Pages/MainPage.cpp" line="75"/>
         <source>Authorization Error</source>
         <translation>Ошибка авторизации</translation>
     </message>
@@ -262,14 +285,100 @@
 <context>
     <name>UserSession</name>
     <message>
-        <location filename="../../Core/UserSession/UserSession.cpp" line="39"/>
+        <location filename="../../Core/UserSession/UserSession.cpp" line="46"/>
         <source>User not found</source>
         <translation>Пользователь не найден</translation>
     </message>
     <message>
-        <location filename="../../Core/UserSession/UserSession.cpp" line="42"/>
+        <location filename="../../Core/UserSession/UserSession.cpp" line="49"/>
         <source>Authorization error: %1</source>
         <translation>Ошибка авторизации: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/UserSession.cpp" line="61"/>
+        <source>Failed to determine employee position: %1</source>
+        <translation>Не удалось определить должность сотрудника: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/UserSession.cpp" line="67"/>
+        <source>Active employee %1 was not found.</source>
+        <translation>Действующий сотрудник %1 не найден.</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/UserSession.cpp" line="81"/>
+        <source>Access for position &quot;%1&quot; is not implemented yet.</source>
+        <translation>Доступ для должности «%1» ещё не реализован.</translation>
+    </message>
+</context>
+<context>
+    <name>VetAccessView</name>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="59"/>
+        <source>Failed to load animals list: %1</source>
+        <translation>Не удалось загрузить список животных: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="74"/>
+        <source>Animal %1 was not found.</source>
+        <translation>Животное %1 не найдено.</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="85"/>
+        <source>Failed to load animal details: %1</source>
+        <translation>Не удалось загрузить подробные данные животного: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="101"/>
+        <source>Failed to load medical events: %1</source>
+        <translation>Не удалось загрузить мероприятия: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="120"/>
+        <source>Failed to load assigned medical events: %1</source>
+        <translation>Не удалось загрузить назначенные мероприятия: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="139"/>
+        <source>Failed to load animal medical events: %1</source>
+        <translation>Не удалось загрузить мероприятия животного: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="167"/>
+        <source>Failed to load animal medical history: %1</source>
+        <translation>Не удалось загрузить историю болезни животного: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="199"/>
+        <source>Failed to register medical event: %1</source>
+        <translation>Не удалось зарегистрировать мероприятие: %1</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="209"/>
+        <source>Medical event result cannot be empty.</source>
+        <translation>Результат мероприятия не может быть пустым.</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="220"/>
+        <source>Medical event %1 was not found: %2</source>
+        <translation>Мероприятие %1 не найдено: %2</translation>
+    </message>
+    <message>
+        <location filename="../../Core/UserSession/VetAccessView.cpp" line="233"/>
+        <source>Failed to update medical event result: %1</source>
+        <translation>Не удалось обновить результат мероприятия: %1</translation>
+    </message>
+</context>
+<context>
+    <name>VetMainWidget</name>
+    <message>
+        <location filename="../../UI/Roles/Vet/VetMainWidget.ui" line="62"/>
+        <source>Back</source>
+        <translation>Назад</translation>
+    </message>
+    <message>
+        <location filename="../../UI/Roles/Vet/MainWidget.cpp" line="49"/>
+        <source>Data Error</source>
+        <translation>Ошибка данных</translation>
     </message>
 </context>
 </TS>

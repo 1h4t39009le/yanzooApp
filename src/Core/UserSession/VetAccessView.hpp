@@ -69,6 +69,8 @@ public slots:
     void selectAnimal(int animalId);
     // Весь журнал мероприятий из UserMedEvtView.
     void refreshMedicalEvents();
+    // Мероприятия, назначенные текущему ветеринарному врачу.
+    void refreshAssignedMedicalEvents();
     // Мероприятия конкретного животного из UserMedEvtView.
     void loadMedicalEvents(int animalId);
     // История болезни конкретного животного из UserMedHistoryView.
@@ -80,6 +82,7 @@ public slots:
 
 private:
     AnimalInfo readAnimal(const QSqlQuery &query) const;
+    QList<MedicalEventInfo> readMedicalEvents(QSqlQuery &query) const;
 
     QList<AnimalInfo> m_animals;
     AnimalInfo m_currentAnimal;

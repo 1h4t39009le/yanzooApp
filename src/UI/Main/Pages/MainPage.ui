@@ -115,6 +115,7 @@
       </layout>
      </widget>
      <widget class="KeeperMainWidget" name="keeperPage"/>
+     <widget class="VetMainWidget" name="vetPage"/>
     </widget>
    </item>
    <item>
@@ -335,6 +336,11 @@
    <class>KeeperMainWidget</class>
    <extends>QWidget</extends>
    <header>Roles/Keeper/MainWidget.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>VetMainWidget</class>
+   <extends>QWidget</extends>
+   <header>Roles/Vet/MainWidget.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
