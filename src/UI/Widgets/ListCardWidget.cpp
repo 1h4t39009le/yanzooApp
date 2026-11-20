@@ -37,6 +37,9 @@ void ListCardWidget::setBadge(const QString &badge)
     ui->cardBadgeLabel->setText(badge);
     ui->cardBadgeFrame->setVisible(!badge.isEmpty());
 }
+void ListCardWidget::setTitle(const QString &title){
+	ui->cardTitleLabel->setText(title);
+}
 /*
 TODO: Remove if we don't use it
 void ListCardWidget::setIcon(const QString &iconName)

@@ -26,7 +26,7 @@ public:
     void setAccess(VetAccessView *view);
 
 private slots:
-    void onMedicalEventsLoaded(const QList<VetAccessView::MedicalEventInfo> &events);
+    void onAssignedMedicalEventsLoaded(const QList<VetAccessView::MedicalEventInfo> &events);
 
 protected:
     void retranslateUi() override;

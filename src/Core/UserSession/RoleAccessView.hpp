@@ -14,6 +14,16 @@ class RoleAccessView : public DbAccessController {
     Q_OBJECT
 public:
     using EmployeeID = int64_t;
+	struct AnimalInfo {
+        int id = 0;
+        int enclosureId = 0;
+        QString species;
+        QString nickname;
+        QString gender;
+        int age = 0;
+        int hoursSinceFed = 0;
+        int rationId = 0;
+    };
 
     explicit RoleAccessView(QObject *parent, EmployeeID empId, QSqlDatabase db)
         : DbAccessController(db, parent)

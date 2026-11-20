@@ -1,6 +1,8 @@
 #include "EventsPage.hpp"
 #include "ui_EventsPage.h"
 
+#include "Common/WidgetUpdateGuard.hpp"
+#include "Widgets/ListCardDelegate.hpp"
 #include "Widgets/ListCardWidget.hpp"
 
 #include <QListWidgetItem>
@@ -17,7 +19,10 @@ EventsPage::EventsPage(QWidget *parent)
     ui->eventList->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->eventList->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->eventList->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
-
+	
+	ui->eventList->setItemDelegate(new ListCardDelegate(ui->eventList));
+    ui->eventList->setUniformItemSizes(true);
+	
     rebuild();
 }
 
@@ -37,6 +42,7 @@ void EventsPage::retranslateUi()
 
 void EventsPage::rebuild()
 {
+    WidgetUpdateGuard guard(ui->eventList);
     ui->eventList->clear();
 
     for (const VetData::MedicalEventInfo &event : m_events) {
@@ -48,16 +54,12 @@ void EventsPage::rebuild()
                                               : QString())
                                      .arg(event.species)
                                      .arg(event.age);
-
-        auto *item = new QListWidgetItem(ui->eventList);
+		auto *item = new QListWidgetItem();
         item->setData(Qt::UserRole, event.id);
-        item->setSizeHint(QSize(0, 78));
-
-        auto *card = new ListCardWidget(title, subtitle, ui->eventList);
-        if (event.date.isValid()) {
-            card->setBadge(event.date.toString(QStringLiteral("HH:mm")));
-        }
-        ui->eventList->setItemWidget(item, card);
+        item->setData(Qt::DisplayRole, title);
+        item->setData(ListCardDelegate::SubtitleRole, subtitle);
+		item->setData(ListCardDelegate::BadgeRole, event.date.toString(QStringLiteral("HH:mm")));
+        ui->eventList->addItem(item);
     }
 
     const bool empty = m_events.isEmpty();

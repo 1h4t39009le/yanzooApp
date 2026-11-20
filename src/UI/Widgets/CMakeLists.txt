@@ -1,7 +1,9 @@
 target_sources(${LIBRARY_NAME} PRIVATE 
 	TrWidget.hpp
-#ListItem
+#ListCard
 	ListCardWidget.hpp
 	ListCardWidget.cpp
 	ListCardWidget.ui
+	ListCardDelegate.hpp
+	ListCardDelegate.cpp
 )

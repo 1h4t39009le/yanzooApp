@@ -16,17 +16,6 @@ public:
         int count;
         int maxHoursSinceFed;
     };
-
-    struct AnimalInfo {
-        int id;
-        QString species;
-        QString nickname;
-        QString gender;
-        int age;
-        int hoursSinceFed;
-        int rationId;
-    };
-
     struct AnimalFullDetails {
         AnimalInfo base;
         QString feedingFrequency;

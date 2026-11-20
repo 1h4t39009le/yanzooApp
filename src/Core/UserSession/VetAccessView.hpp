@@ -18,17 +18,6 @@ class QSqlQuery;
 class VetAccessView : public RoleAccessView {
     Q_OBJECT
 public:
-    struct AnimalInfo {
-        int id = 0;
-        int enclosureId = 0;
-        QString species;
-        QString nickname;
-        QString gender;
-        int age = 0;
-        int hoursSinceFed = 0;
-        int rationId = 0;
-    };
-
     struct MedicalEventInfo {
         int eventId = 0;
         int employeeId = 0;
@@ -49,45 +38,29 @@ public:
 
     explicit VetAccessView(QObject *parent, EmployeeID empId, QSqlDatabase db);
 
-    QList<AnimalInfo> animals() const { return m_animals; }
+    QList<MedicalEventInfo> assignedMedicalEvents() const { return m_assignedMedicalEvents; }
     AnimalInfo currentAnimal() const { return m_currentAnimal; }
-    QList<MedicalEventInfo> medicalEvents() const { return m_medicalEvents; }
     QList<MedicalHistoryEntry> currentAnimalHistory() const { return m_currentAnimalHistory; }
 
 signals:
-    void animalsLoaded(const QList<VetAccessView::AnimalInfo> &animals);
     void animalLoaded(const VetAccessView::AnimalInfo &animal);
-    void medicalEventsLoaded(const QList<VetAccessView::MedicalEventInfo> &events);
+    void assignedMedicalEventsLoaded(const QList<VetAccessView::MedicalEventInfo> &events);
     void medicalHistoryLoaded(int animalId, const QList<VetAccessView::MedicalHistoryEntry> &history);
-    void medicalEventRegistered(int eventId);
     void medicalEventResultUpdated(int eventId);
 
 public slots:
-    // Полный список животных из UserAnimView.
-    void refreshAnimals();
-    // Карточка животного из UserAnimView + его мероприятия и история.
     void selectAnimal(int animalId);
-    // Весь журнал мероприятий из UserMedEvtView.
-    void refreshMedicalEvents();
-    // Мероприятия, назначенные текущему ветеринарному врачу.
     void refreshAssignedMedicalEvents();
-    // Мероприятия конкретного животного из UserMedEvtView.
-    void loadMedicalEvents(int animalId);
-    // История болезни конкретного животного из UserMedHistoryView.
     void loadMedicalHistory(int animalId);
-    // Новое мероприятие; пустой result записывается как NULL.
-    void registerMedicalEvent(int animalId, const QString &type, const QString &result = QString());
-    // Заполнение результата уже созданного мероприятия (правила — в триггере).
     void updateMedicalEventResult(int eventId, const QString &result);
 
 private:
     AnimalInfo readAnimal(const QSqlQuery &query) const;
     QList<MedicalEventInfo> readMedicalEvents(QSqlQuery &query) const;
 
-    QList<AnimalInfo> m_animals;
     AnimalInfo m_currentAnimal;
-    QList<MedicalEventInfo> m_medicalEvents;
     QList<MedicalHistoryEntry> m_currentAnimalHistory;
+    QList<MedicalEventInfo> m_assignedMedicalEvents;
 };
 
 #endif // VETACCESSVIEW_HPP

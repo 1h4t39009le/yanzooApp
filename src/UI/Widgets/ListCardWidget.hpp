@@ -29,7 +29,7 @@ public:
                             const QString &subtitle,
                             QWidget *parent = nullptr);
     ~ListCardWidget() override;
-
+	void setTitle(const QString &title);
     void setSubtitle(const QString &subtitle);
     // Пустой бейдж скрывает синюю рамку целиком.
     void setBadge(const QString &badge);

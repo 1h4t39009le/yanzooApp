@@ -41,26 +41,6 @@ QList<VetAccessView::MedicalEventInfo> VetAccessView::readMedicalEvents(QSqlQuer
     return events;
 }
 
-void VetAccessView::refreshAnimals()
-{
-    if (!ensureOpen()) return;
-
-    QList<AnimalInfo> newList;
-    QSqlQuery query(m_db);
-    query.prepare("SELECT * FROM UserAnimView ORDER BY species, nickname");
-
-    if (query.exec()) {
-        while (query.next()) {
-            newList.append(readAnimal(query));
-        }
-        m_animals = newList;
-        emit animalsLoaded(m_animals);
-    } else {
-        emit errorOccurred(tr("Failed to load animals list: %1")
-                               .arg(query.lastError().text()));
-    }
-}
-
 void VetAccessView::selectAnimal(int animalId)
 {
     if (!ensureOpen()) return;
@@ -78,27 +58,10 @@ void VetAccessView::selectAnimal(int animalId)
         m_currentAnimal = readAnimal(query);
         emit animalLoaded(m_currentAnimal);
 
-        // Для карточки ветеринара сразу подтягиваем журнал и историю животного.
-        loadMedicalEvents(animalId);
+        // Карточка ветеринара сразу подтягивает историю болезни животного.
         loadMedicalHistory(animalId);
     } else {
         emit errorOccurred(tr("Failed to load animal details: %1")
-                               .arg(query.lastError().text()));
-    }
-}
-
-void VetAccessView::refreshMedicalEvents()
-{
-    if (!ensureOpen()) return;
-
-    QSqlQuery query(m_db);
-    query.prepare("SELECT * FROM UserMedEvtView ORDER BY date DESC, event_id DESC");
-
-    if (query.exec()) {
-        m_medicalEvents = readMedicalEvents(query);
-        emit medicalEventsLoaded(m_medicalEvents);
-    } else {
-        emit errorOccurred(tr("Failed to load medical events: %1")
                                .arg(query.lastError().text()));
     }
 }
@@ -114,29 +77,10 @@ void VetAccessView::refreshAssignedMedicalEvents()
     query.bindValue(":empId", static_cast<qlonglong>(employeeId()));
 
     if (query.exec()) {
-        m_medicalEvents = readMedicalEvents(query);
-        emit medicalEventsLoaded(m_medicalEvents);
+        m_assignedMedicalEvents = readMedicalEvents(query);
+        emit assignedMedicalEventsLoaded(m_assignedMedicalEvents);
     } else {
         emit errorOccurred(tr("Failed to load assigned medical events: %1")
-                               .arg(query.lastError().text()));
-    }
-}
-
-void VetAccessView::loadMedicalEvents(int animalId)
-{
-    if (!ensureOpen()) return;
-
-    QSqlQuery query(m_db);
-    query.prepare("SELECT * FROM UserMedEvtView "
-                  "WHERE animal_id = :animId "
-                  "ORDER BY date DESC, event_id DESC");
-    query.bindValue(":animId", animalId);
-
-    if (query.exec()) {
-        m_medicalEvents = readMedicalEvents(query);
-        emit medicalEventsLoaded(m_medicalEvents);
-    } else {
-        emit errorOccurred(tr("Failed to load animal medical events: %1")
                                .arg(query.lastError().text()));
     }
 }
@@ -165,38 +109,6 @@ void VetAccessView::loadMedicalHistory(int animalId)
         emit medicalHistoryLoaded(animalId, m_currentAnimalHistory);
     } else {
         emit errorOccurred(tr("Failed to load animal medical history: %1")
-                               .arg(query.lastError().text()));
-    }
-}
-
-void VetAccessView::registerMedicalEvent(int animalId, const QString &type, const QString &result)
-{
-    if (!ensureOpen()) return;
-
-    QSqlQuery query(m_db);
-    query.prepare("SET NOCOUNT ON; "
-                  "INSERT INTO MedicalEvent (animal_id, employee_id, type, date, result) "
-                  "VALUES (:animalId, :empId, :type, GETDATE(), :result); "
-                  "SELECT CAST(SCOPE_IDENTITY() AS INT) AS event_id;");
-
-    query.bindValue(":animalId", animalId);
-    query.bindValue(":empId", static_cast<qlonglong>(employeeId()));
-    query.bindValue(":type", type);
-    query.bindValue(":result", result.isEmpty()
-                                  ? QVariant(QMetaType(QMetaType::QString))
-                                  : QVariant(result));
-
-    if (query.exec()) {
-        const int eventId = query.next() ? query.value("event_id").toInt() : -1;
-        emit medicalEventRegistered(eventId);
-
-        // Синхронно обновляем карточку животного, если открыто именно оно.
-        if (m_currentAnimal.id == animalId) {
-            loadMedicalEvents(animalId);
-            loadMedicalHistory(animalId);
-        }
-    } else {
-        emit errorOccurred(tr("Failed to register medical event: %1")
                                .arg(query.lastError().text()));
     }
 }
@@ -236,6 +148,9 @@ void VetAccessView::updateMedicalEventResult(int eventId, const QString &result)
     }
 
     emit medicalEventResultUpdated(eventId);
-    loadMedicalEvents(animalId);
+
+    // Результат входит в историю болезни, а журнал назначенных мероприятий
+    // мог измениться — обновляем оба представления.
+    refreshAssignedMedicalEvents();
     loadMedicalHistory(animalId);
 }

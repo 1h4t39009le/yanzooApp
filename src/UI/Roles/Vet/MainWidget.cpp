@@ -42,14 +42,14 @@ void VetMainWidget::setAccess(VetAccessView *view)
         return;
     }
 
-    connect(m_access, &VetAccessView::medicalEventsLoaded,
-            this, &VetMainWidget::onMedicalEventsLoaded);
+    connect(m_access, &VetAccessView::assignedMedicalEventsLoaded,
+            this, &VetMainWidget::onAssignedMedicalEventsLoaded);
     connect(m_access, &VetAccessView::errorOccurred,
             this, [this](const QString &message) {
                 QMessageBox::critical(this, tr("Data Error"), message);
             });
 
-    // Данные придут обратно синхронно сигналом medicalEventsLoaded().
+    // Данные придут обратно синхронно сигналом assignedMedicalEventsLoaded().
     m_access->refreshAssignedMedicalEvents();
 }
 
@@ -61,7 +61,7 @@ void VetMainWidget::setupPages()
     ui->pageStack->setCurrentWidget(m_eventsPage);
 }
 
-void VetMainWidget::onMedicalEventsLoaded(const QList<VetAccessView::MedicalEventInfo> &events)
+void VetMainWidget::onAssignedMedicalEventsLoaded(const QList<VetAccessView::MedicalEventInfo> &events)
 {
     // Адаптер Core -> UI: страница не знает про вьюху и работает
     // с собственным представлением данных.
